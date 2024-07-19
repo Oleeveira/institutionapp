@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/pages/inicial_page.dart';
 import 'package:institutionapp/pages/item_register_page.dart';
-import 'package:institutionapp/pages/item_register_page.dart';
 import 'package:institutionapp/pages/legal_entities_profile_page.dart';
 import 'package:institutionapp/pages/legal_entities_login_page.dart';
 

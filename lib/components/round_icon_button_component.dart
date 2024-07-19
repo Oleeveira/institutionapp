@@ -5,10 +5,10 @@ class RoundIconButtonComponent extends StatelessWidget {
   final void Function()? onTap;
 
   const RoundIconButtonComponent({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

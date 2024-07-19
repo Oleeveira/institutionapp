@@ -74,52 +74,48 @@ class InicialPage extends StatelessWidget {
 
  void _opcoesEntrada(context){
   showModalBottomSheet(context: context, builder: (BuildContext bc){
-    return Container(
-            child: Wrap(children: <Widget>[
-          ListTile(
-            leading:  const Icon(Icons.phone_in_talk_outlined),
-            title:  const Text('Entre com telefone'),  iconColor: Colors.blueGrey,
-            onTap: () => { },          
-          ),
-	        ListTile(
-	          leading:  const Icon(Icons.g_mobiledata_outlined),
-	          title:  const Text('Entre com Google'),  iconColor: Colors.red,
-	          onTap: () => {}, 
-	        ),
-          ListTile(
-	          leading:  const Icon(Icons.facebook),
-	          title:  const Text('Entre com Facebook'),  iconColor: const Color.fromARGB(255, 37, 0, 201),
-	          onTap: () => {}, 
-	        ),
-         ],
-        ),
-       );   
+    return Wrap(children: <Widget>[
+              ListTile(
+    leading:  const Icon(Icons.phone_in_talk_outlined),
+    title:  const Text('Entre com telefone'),  iconColor: Colors.blueGrey,
+    onTap: () => { },          
+              ),
+    	        ListTile(
+    	          leading:  const Icon(Icons.g_mobiledata_outlined),
+    	          title:  const Text('Entre com Google'),  iconColor: Colors.red,
+    	          onTap: () => {}, 
+    	        ),
+              ListTile(
+    	          leading:  const Icon(Icons.facebook),
+    	          title:  const Text('Entre com Facebook'),  iconColor: const Color.fromARGB(255, 37, 0, 201),
+    	          onTap: () => {}, 
+    	        ),
+             ],
+            );   
     }
   );
 } 
 
 void _opcoesCadastro(context){
   showModalBottomSheet(context: context, builder: (BuildContext bc){
-    return Container(
-            child: Wrap(children: <Widget>[
-          ListTile(
-            leading:  const Icon(Icons.phone_in_talk_outlined),
-            title:  const Text('Cadastrar-se com telefone'),  iconColor: Colors.blueGrey,
-            onTap: () => { },          
-          ),
-	        ListTile(
-	          leading:  const Icon(Icons.g_mobiledata_outlined),
-	          title:  const Text('Continuar com Google'),  iconColor: Colors.red,
-	          onTap: () => {}, 
-	        ),
-          ListTile(
-	          leading:  const Icon(Icons.facebook),
-	          title:  const Text('Continuar com Facebook'),  iconColor: const Color.fromARGB(255, 37, 0, 201),
-	          onTap: () => {}, 
-	        ),
-         ],
-        ),
-       );   
+    return Wrap(children: <Widget>[
+              ListTile(
+    leading:  const Icon(Icons.phone_in_talk_outlined),
+    title:  const Text('Cadastrar-se com telefone'),  iconColor: Colors.blueGrey,
+    onTap: () => { },          
+              ),
+    	        ListTile(
+    	          leading:  const Icon(Icons.g_mobiledata_outlined),
+    	          title:  const Text('Continuar com Google'),  iconColor: Colors.red,
+    	          onTap: () => {}, 
+    	        ),
+              ListTile(
+    	          leading:  const Icon(Icons.facebook),
+    	          title:  const Text('Continuar com Facebook'),  iconColor: const Color.fromARGB(255, 37, 0, 201),
+    	          onTap: () => {}, 
+    	        ),
+             ],
+            );   
     }
   );
 }

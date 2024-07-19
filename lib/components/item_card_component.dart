@@ -18,7 +18,8 @@ class ItemCardComponentState extends State<ItemCardComponent> {
           padding: const EdgeInsets.only(left: 9.0, right: 9.0),
           child: Stack(
             children: [
-              Align(alignment: Alignment.centerRight ,
+              Align(
+                alignment: Alignment.centerRight,
                 child: Material(
                   child: Container(
                     width: 45.0,
@@ -33,7 +34,10 @@ class ItemCardComponentState extends State<ItemCardComponent> {
                       padding: const EdgeInsets.only(left: 8.5),
                       child: IconButton(
                         onPressed: () {},
-                        icon: Image.asset('assets/EditIcon.png', scale: 4.5,),
+                        icon: Image.asset(
+                          'assets/EditIcon.png',
+                          scale: 4.5,
+                        ),
                       ),
                     ),
                   ),
@@ -53,40 +57,50 @@ class ItemCardComponentState extends State<ItemCardComponent> {
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
                         children: [
-                          Align(alignment: Alignment.topLeft,
+                          const Align(
+                            alignment: Alignment.topLeft,
                             child: Text(
                               "Agasalho",
                               style: TextStyle(
-                                  fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                           Row(
                             children: [
-                              Align( alignment: Alignment.bottomLeft,
+                              const Align(
+                                alignment: Alignment.bottomLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 5.0),
+                                  padding: EdgeInsets.only(right: 5.0),
                                   child: Opacity(
                                     opacity: 0.7,
                                     child: Text("10 de Abril de 2024"),
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
+                              const Padding(
+                                padding: EdgeInsets.all(3.0),
                                 child: Icon(
                                   Icons.volunteer_activism,
                                   size: 20,
                                 ),
                               ),
-                              Opacity(
+                              const Opacity(
                                 opacity: 0.7,
                                 child: Text("1"),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 18.0),
-                                child: Material(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)) ,
-                                  child: Container(color: Color.fromARGB(255, 237, 237, 237),height: 25 , width: 90, 
-                                    child: Text(
+                                child: Material(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(50.0)),
+                                  child: Container(
+                                    color: const Color.fromARGB(
+                                        255, 237, 237, 237),
+                                    height: 25,
+                                    width: 90,
+                                    child: const Text(
                                       "Vestimentas",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w900,
@@ -94,9 +108,9 @@ class ItemCardComponentState extends State<ItemCardComponent> {
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -109,25 +123,25 @@ class ItemCardComponentState extends State<ItemCardComponent> {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Material(
+            elevation: 5.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
             child: Container(
               width: 400.0,
               height: 70.0,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     size: 40,
                     color: Color.fromARGB(255, 24, 32, 101),
                   ),
                 ),
               ),
-            ),
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
             ),
           ),
         ),

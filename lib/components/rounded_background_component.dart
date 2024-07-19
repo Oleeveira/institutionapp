@@ -5,10 +5,10 @@ class RoundedBackgroundComponent extends StatelessWidget {
   final Widget child;
 
   const RoundedBackgroundComponent({
-    Key? key,
+    super.key,
     required this.height,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

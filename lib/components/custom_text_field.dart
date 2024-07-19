@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextInputType type;
   final String hint;
-  final String label;
   final _formKey = GlobalKey<FormState>();
   final bool
       textarea; // Novo parâmetro para definir a a quntidade mínima de linhas
@@ -12,7 +11,6 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.type,
     required this.hint,
-    required this.label,
     this.textarea = false,
   });
 
@@ -35,9 +33,12 @@ class CustomTextField extends StatelessWidget {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color.fromARGB(255, 243, 243, 243),
-                  hintText: hint,
-                  labelText: label,
-                  border: OutlineInputBorder(
+                  helperText: hint,
+                  border: OutlineInputBorder( 
+                    borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),                     
                       borderRadius: BorderRadius.circular(20.0))),
             ),
           ),
