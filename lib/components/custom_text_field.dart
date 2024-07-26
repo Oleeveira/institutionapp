@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
   final TextInputType type;
-  final String hint;
   final _formKey = GlobalKey<FormState>();
   final bool
       textarea; // Novo parâmetro para definir a a quntidade mínima de linhas
@@ -10,7 +10,7 @@ class CustomTextField extends StatelessWidget {
   CustomTextField({
     super.key,
     required this.type,
-    required this.hint,
+    required this.controller,
     this.textarea = false,
   });
 
@@ -22,24 +22,30 @@ class CustomTextField extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Digite aqui';
-                }
-                return null;
-              },
-              keyboardType: type,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color.fromARGB(255, 243, 243, 243),
-                  helperText: hint,
-                  border: OutlineInputBorder( 
+            child: Material(
+              child: TextFormField(
+                controller: controller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Digite aqui';
+                  }
+                  return null;
+                },
+                keyboardType: type,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color.fromARGB(255, 243, 243, 243),
+                  border: OutlineInputBorder(
                     borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),                     
-                      borderRadius: BorderRadius.circular(20.0))),
+                      width: 0,
+                      style: BorderStyle.none,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+              ),
+              elevation: 9.5,
+              color: Colors.transparent,
             ),
           ),
           const Padding(

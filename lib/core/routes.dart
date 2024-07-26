@@ -31,7 +31,7 @@ class AppRountersConfiguration {
           path: '/item_register_page',
           name: RouteNames.item_register_page,
           pageBuilder: (context, state) {
-            return const MaterialPage(
+            return  MaterialPage(
               child: ItemRegisterPage(),
               fullscreenDialog: true,
             );
@@ -41,7 +41,7 @@ class AppRountersConfiguration {
           path: '/legal_entities_login',
           name: RouteNames.legal_entities_login,
           pageBuilder: (context, state) {
-            return const MaterialPage(
+            return  MaterialPage(
               child: LegalEntitiesLoginPage(),
             );
           },

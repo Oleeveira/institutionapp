@@ -1,11 +1,20 @@
-//Tela de login para instituições
 
+import 'package:institutionapp/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:institutionapp/components/custom_formulary_button.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
+import 'package:institutionapp/controllers/login_controller.dart';
 
-class LegalEntitiesLoginPage extends StatelessWidget {
-  const LegalEntitiesLoginPage({super.key});
+class LegalEntitiesLoginPage extends StatefulWidget {
+
+  LegalEntitiesLoginPage({super.key});
+
+  @override
+  State<LegalEntitiesLoginPage> createState() => _LegalEntitiesLoginPageState();
+}
+
+class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
+  final loginController = LoginController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +39,11 @@ class LegalEntitiesLoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomTextField(
-                  hint: 'Username',
-                  type: TextInputType.name,
+                  type: TextInputType.emailAddress,
+                  controller: loginController.crtlEmail,
                 ),
                 CustomTextField(
-                  hint: 'Password',
+                  controller: loginController.crtlPassword,
                   type: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 20),
