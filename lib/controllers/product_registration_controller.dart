@@ -22,7 +22,7 @@ class ProductRegistrationController {
 
   set itemQtd(int qtd) => itemQtdValue.value = qtd;
 
-    String? get selectedItemCategory => selectedValueCategory.value;
+    String? get selectedItemCategory => selectedValueCategory.value;  
 
   int get itemQtd => itemQtdValue.value;
 

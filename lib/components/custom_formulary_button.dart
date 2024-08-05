@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 class CustomFormularyButton extends StatelessWidget {
   final Widget? child;
   final Function? onPressed;
+  final Navigator? navigator;
 
-  const CustomFormularyButton({super.key, this.child, this.onPressed});
+  const CustomFormularyButton({super.key, this.child, this.onPressed, this.navigator});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        navigator;
+      },
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * 0.75,

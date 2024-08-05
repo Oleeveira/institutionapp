@@ -1,13 +1,12 @@
-
+import 'package:go_router/go_router.dart';
 import 'package:institutionapp/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:institutionapp/components/custom_formulary_button.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
-import 'package:institutionapp/controllers/login_controller.dart';
+import 'package:institutionapp/pages/home_page.dart';
 
 class LegalEntitiesLoginPage extends StatefulWidget {
-
-  LegalEntitiesLoginPage({super.key});
+  const LegalEntitiesLoginPage({super.key});
 
   @override
   State<LegalEntitiesLoginPage> createState() => _LegalEntitiesLoginPageState();
@@ -47,10 +46,10 @@ class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
                   type: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 20),
-                CustomFormularyButton(
-                  onPressed: () {
-                    // Ação de login
-                  },
+                ElevatedButton(
+                  onPressed: 
+                    () {GoRouter.of(context).go('/home_page');} , 
+                  // Ação de login,
                   child: const Text(
                     'Continuar',
                     style: TextStyle(
