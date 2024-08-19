@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/*class Gallery extends StatefulWidget {
+class Gallery extends StatefulWidget {
   @override
   _GalleryState createState() => _GalleryState();
 }
@@ -8,49 +8,43 @@ import 'package:flutter/material.dart';
 class _GalleryState extends State<Gallery> {
   late OverlayEntry _popupDialog;
   List<String> imageUrls = [
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
+    'https://imgs.search.brave.com/IzCeCU8PrEZ9T52ad2djo7oiwnH7Oue-3x_MKTRFZek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM1/MzMzMjI1OC9waG90/by9kb25hdGlvbi1j/b25jZXB0LXRoZS12/b2x1bnRlZXItZ2l2/aW5nLWEtZG9uYXRl/LWJveC10by10aGUt/cmVjaXBpZW50LXN0/YW5kaW5nLWFnYWlu/c3QtdGhlLXdhbGwu/d2VicD9iPTEmcz0x/NzA2NjdhJnc9MCZr/PTIwJmM9RDUzZHk0/SFBsZkxpOXlDTzhv/dW93SW45SHFJV2Zr/akV4NC1DMDVCOFRZ/VT0',
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Expanded(
-        child: GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          children: imageUrls.map(_createGridTileWidget).toList(),
+    return SizedBox(
+      child: Scaffold(
+        body: Expanded(
+          child: GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            childAspectRatio: 1.0,
+            children: imageUrls.map(_createGridTileWidget).toList(),
+          ),
         ),
       ),
     );
   }
 
-  Widget _createGridTileWidget(String url) => Builder(
-        builder: (context) => GestureDetector(
-          onLongPress: () {
-            _popupDialog = _createPopupDialog(url);
-            Overlay.of(context).insert(_popupDialog);
-          },
-          onLongPressEnd: (details) => _popupDialog.remove(),
-          child: Image.network(url, fit: BoxFit.cover),
+  Widget _createGridTileWidget(String url) => SizedBox(
+    height: 200, width: 300,
+    child: Builder(
+          builder: (context) => GestureDetector(
+            onLongPress: () {
+              _popupDialog = _createPopupDialog(url);
+              Overlay.of(context).insert(_popupDialog);
+            },
+            onLongPressEnd: (details) => _popupDialog.remove(),
+            child: Image.network(url, fit: BoxFit.cover),
+          ),
         ),
-      );
+  );
 
   OverlayEntry _createPopupDialog(String url) {
     return OverlayEntry(
@@ -156,4 +150,4 @@ class AnimatedDialogState extends State<AnimatedDialog>
       ),
     );
   }
-}*/
+}

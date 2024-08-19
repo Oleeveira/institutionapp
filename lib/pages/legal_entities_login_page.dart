@@ -1,9 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:institutionapp/components/custom_formulary_button.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
-import 'package:institutionapp/pages/home_page.dart';
 
 class LegalEntitiesLoginPage extends StatefulWidget {
   const LegalEntitiesLoginPage({super.key});

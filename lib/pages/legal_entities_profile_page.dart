@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:institutionapp/components/gallery.dart';
+import 'package:institutionapp/components/gallery_state.dart';
 import 'package:institutionapp/components/item_card_component.dart';
 import 'package:institutionapp/components/profile_info_component.dart';
 
@@ -28,7 +32,7 @@ class LegalEntitiesProfilePageState extends State<LegalEntitiesProfilePage> {
                     margin: const EdgeInsets.only(bottom: 20.0),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
@@ -93,11 +97,10 @@ class LegalEntitiesProfilePageState extends State<LegalEntitiesProfilePage> {
                             ),
                           ),
                         ),
-                        VisitCard(),
-                        VisitCard(),
                       ],
                     ),
                   ),
+                  SizedBox(height: 500,child: Container(child: Gallery(), ))
                 ],
               ),
             ),

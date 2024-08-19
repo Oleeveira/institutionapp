@@ -12,7 +12,6 @@ class ProfileInfoComponent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 8.0, top: 3.0),
           child: Material(
-            elevation: 15,
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),

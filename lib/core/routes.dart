@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/pages/bottom_bar_state.dart';
@@ -5,6 +7,7 @@ import 'package:institutionapp/pages/home_page.dart';
 import 'package:institutionapp/pages/item_register_page.dart';
 import 'package:institutionapp/pages/legal_entities_profile_page.dart';
 import 'package:institutionapp/pages/legal_entities_login_page.dart';
+import 'package:institutionapp/pages/post_page.dart';
 
 class RouteNames {
   static const String legal_entities_login = "legal_entities_login";
@@ -13,12 +16,13 @@ class RouteNames {
   static const String item_register_page = "item_register_page";
   static const String home_page = "home_page";
   static const String bottom_bar_state = "bar_state";
+  static const String post_page = "post_page";
 }
 
 class AppRountersConfiguration {
   static GoRouter returnRouter() {
     return GoRouter(
-      initialLocation: '/bar_state',
+      initialLocation: '/item_register_page',
       routes: [
         GoRoute(
           path: '/item_register_page',
@@ -42,7 +46,7 @@ class AppRountersConfiguration {
           path: '/legal_entities_login',
           name: RouteNames.legal_entities_login,
           pageBuilder: (context, state) {
-            return  MaterialPage(
+            return  const MaterialPage(
               child: LegalEntitiesLoginPage(),
             );
           },
@@ -62,6 +66,15 @@ class AppRountersConfiguration {
           pageBuilder: (context, state) {
             return const MaterialPage(
               child: BottomBar(),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/post_page',
+          name: RouteNames.post_page,
+          pageBuilder: (context, state) {
+            return const MaterialPage(
+              child: PostPage(),
             );
           },
         ),

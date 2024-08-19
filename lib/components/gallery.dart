@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Gallery extends StatefulWidget {
-  const Gallery({super.key});
+class GalleryList extends StatefulWidget {
+  const GalleryList({super.key});
 
   @override
-  State<Gallery> createState() => _GalleryState();
+  State<GalleryList> createState() => _GalleryListState();
 }
 
 List<String> imageUrls = [
@@ -28,10 +28,10 @@ List<String> imageUrls = [
   ];
 
 
-class _GalleryState extends State<Gallery> {
+class _GalleryListState extends State<GalleryList> {
   @override
   Widget build(BuildContext context) {
-    return GridView.count(crossAxisCount: 3, childAspectRatio: 1.0, shrinkWrap: true,
-          children: [Image.asset('donations.jpg')]);
+    return GridView.count(crossAxisCount: 3, childAspectRatio: 0.5, shrinkWrap: true,
+          children: [ListTile( )]);
   }
 }

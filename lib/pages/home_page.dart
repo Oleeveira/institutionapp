@@ -1,7 +1,4 @@
-import 'package:institutionapp/resources/constant_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:institutionapp/components/bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,14 +16,14 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: ListView.builder(
               itemCount: 12,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
+              itemBuilder: (context, index) => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 20.0,
                     ),
-                    const ListTile(
+                    ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
                           "https://imgs.search.brave.com/EH557LzfsHTfIMbszf0VhVSjTAxp2YIL1olc8zaL-ic/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWM2LmRlcG9zaXRw/aG90b3MuY29tLzEw/MzExNzQvNTk0L2kv/NDUwL2RlcG9zaXRw/aG90b3NfNTk0MjE0/MS1zdG9jay1waG90/by1ncm91cC1vZi1w/YXBlcmNoYWluLWhv/bGRpbmctaGFuZHMu/anBn",
@@ -34,13 +31,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                       title: Text("Lar dos idosos"),
                     ),
-                    const CardItem(),
-                    const SizedBox(
+                    CardItem(),
+                    SizedBox(
                       height: 12.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing",
                         ),

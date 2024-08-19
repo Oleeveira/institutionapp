@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
 import 'package:institutionapp/controllers/product_registration_controller.dart';
 import 'package:institutionapp/resources/text_styles.dart';
@@ -16,11 +16,17 @@ class ItemRegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            GoRouter.of(context).go('/bar_state');
+          },
+        ), 
         title: const Text(
           'Criar nova necessidade',
           style: TextStylesConstants.kformularyTitle,
         ),
-        backgroundColor: Color.fromARGB(255, 3, 32, 106),
+        backgroundColor: const Color.fromARGB(255, 3, 32, 106),
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -39,7 +45,7 @@ class ItemRegisterPage extends StatelessWidget {
                 DonationItemComponent(
                   productRegistrationController: _controller,
                 ),
-                Row(),
+                const Row(),
               ],
             ),
           ),
@@ -78,18 +84,20 @@ class DonationItemComponent extends StatelessWidget {
                 type: TextInputType.multiline,
                 controller: productRegistrationController.crtlDesc),
             const SizedBox(height: 20),
-            const Text('Categoria'),
+            const Text('Categoria e Quantidade'),
             Row(
               children: [
-                CustomDropDownButtonComponent(
-                  selected:
-                      productRegistrationController.selectedValueCategory.value,
-                  items: productRegistrationController.category,
-                  hint: 'Selecione uma opção',
-                  onChanged: (item) =>
-                      productRegistrationController.selectedItemCategory = item,
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: CustomDropDownButtonComponent(
+                    selected:
+                        productRegistrationController.selectedValueCategory.value,
+                    items: productRegistrationController.category,
+                    hint: 'Selecione uma opção',
+                    onChanged: (item) =>
+                        productRegistrationController.selectedItemCategory = item,
+                  ),
                 ),
-                const Text('Quantidade'),
                 Flexible(
                   child: CustomTextField(
                     controller: productRegistrationController.crtlQtd,
@@ -98,6 +106,31 @@ class DonationItemComponent extends StatelessWidget {
                 ),
               ],
             ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 180.0),
+                child: SizedBox(
+                  height: 70,
+                  width: 400,
+                  child: ElevatedButton(
+                        onPressed: () {
+                          GoRouter.of(context).go('/bar_state');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.indigo.shade900,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Continuar',
+                          style: TextStyle(color: Colors.white, fontSize: 20.0),
+                        ),
+                                   ),
+                ),
+              ),
+            )
           ],
         );
       },
