@@ -6,4 +6,5 @@ class LoginController {
 
   TextEditingController get crtlEmail => _crtlEmail;
   TextEditingController get crtlPassword => _crtlPassword;
+
 }

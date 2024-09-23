@@ -1,7 +1,7 @@
-import 'package:go_router/go_router.dart';
-import 'package:institutionapp/controllers/login_controller.dart';
+import 'package:go_router/go_router.dart';import 'package:institutionapp/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
+
 
 class LegalEntitiesLoginPage extends StatefulWidget {
   const LegalEntitiesLoginPage({super.key});
@@ -12,6 +12,11 @@ class LegalEntitiesLoginPage extends StatefulWidget {
 
 class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
   final loginController = LoginController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +42,11 @@ class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
               children: [
                 CustomTextField(
                   type: TextInputType.emailAddress,
-                  controller: loginController.crtlEmail,
+                  controller: emailController,
                 ),
                 CustomTextField(
-                  controller: loginController.crtlPassword,
-                  type: TextInputType.visiblePassword,
-                ),
+                  controller: passwordController,
+                  type: TextInputType.visiblePassword,),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: 

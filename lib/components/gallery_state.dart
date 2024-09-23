@@ -33,18 +33,19 @@ class _GalleryState extends State<Gallery> {
   }
 
   Widget _createGridTileWidget(String url) => SizedBox(
-    height: 200, width: 300,
-    child: Builder(
+        height: 200,
+        width: 300,
+        child: Builder(
           builder: (context) => GestureDetector(
             onLongPress: () {
               _popupDialog = _createPopupDialog(url);
               Overlay.of(context).insert(_popupDialog);
             },
-            onLongPressEnd: (details) => _popupDialog.remove(),
             child: Image.network(url, fit: BoxFit.cover),
+            onDoubleTapCancel: () => _popupDialog.remove,
           ),
         ),
-  );
+      );
 
   OverlayEntry _createPopupDialog(String url) {
     return OverlayEntry(
@@ -57,7 +58,8 @@ class _GalleryState extends State<Gallery> {
   Widget _createPhotoTitle() => Container(
       width: double.infinity,
       color: Colors.white,
-      child: ListTile(
+      child: const ListTile(
+        
         leading: CircleAvatar(
           backgroundImage: NetworkImage('https://placeimg.com/640/480/people'),
         ),
@@ -68,29 +70,42 @@ class _GalleryState extends State<Gallery> {
       ));
 
   Widget _createActionBar() => Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(
-              Icons.favorite_border,
-              color: Colors.black,
-            ),
-            Icon(
-              Icons.chat_bubble_outline_outlined,
-              color: Colors.black,
-            ),
-            Icon(
+            const Icon(
               Icons.send,
               color: Colors.black,
             ),
+            IconButton(
+                icon: const Icon(Icons.delete),
+                color: Colors.black,
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        title: const Text("Deletar foto?"),
+                        content: const Text("A foto será deletada permanentemente."),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => Navigator.pop(context, "Voltar"),
+                              child: const Text("Voltar")),
+                          TextButton(
+                              onPressed: () => Navigator.pop(context, "Deletar", ),
+                              child: const Text(
+                                "Deletar",
+                                style: TextStyle(color: Colors.red),
+                              ))
+                        ],
+                      ),
+                ),),
           ],
         ),
       );
 
   Widget _createPopupContent(String url) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
           child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemCardComponent extends StatefulWidget {
   const ItemCardComponent({
@@ -10,6 +11,9 @@ class ItemCardComponent extends StatefulWidget {
 }
 
 class ItemCardComponentState extends State<ItemCardComponent> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +37,7 @@ class ItemCardComponentState extends State<ItemCardComponent> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.5),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {GoRouter.of(context).go('/item_edit');},
                         icon: Image.asset(
                           'assets/EditIcon.png',
                           scale: 4.5,

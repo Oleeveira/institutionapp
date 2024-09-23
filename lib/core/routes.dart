@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/pages/bottom_bar_state.dart';
+import 'package:institutionapp/pages/edit_item_page.dart';
 import 'package:institutionapp/pages/home_page.dart';
 import 'package:institutionapp/pages/item_register_page.dart';
 import 'package:institutionapp/pages/legal_entities_profile_page.dart';
 import 'package:institutionapp/pages/legal_entities_login_page.dart';
+import 'package:institutionapp/pages/legal_entities_register_page.dart';
 import 'package:institutionapp/pages/post_page.dart';
 
 class RouteNames {
@@ -17,13 +19,23 @@ class RouteNames {
   static const String home_page = "home_page";
   static const String bottom_bar_state = "bar_state";
   static const String post_page = "post_page";
+  static const String item_edit_page = "item_edit";
 }
 
 class AppRountersConfiguration {
   static GoRouter returnRouter() {
     return GoRouter(
-      initialLocation: '/item_register_page',
+      initialLocation: '/inicial',
       routes: [
+        GoRoute(
+          path: '/inicial',
+          name: RouteNames.inicial,
+          pageBuilder: (context, state) {
+            return  const MaterialPage(
+              child: InstitutionRegisterPage(),
+            );
+          },
+        ),
         GoRoute(
           path: '/item_register_page',
           name: RouteNames.item_register_page,
@@ -39,6 +51,15 @@ class AppRountersConfiguration {
           pageBuilder: (context, state) {
             return  const MaterialPage(
               child: HomePage(),
+            );
+          },
+        ),
+         GoRoute(
+          path: '/item_edit',
+          name: RouteNames.item_edit_page,
+          pageBuilder: (context, state) {
+            return  MaterialPage(
+              child: ItemEditPage(),
             );
           },
         ),

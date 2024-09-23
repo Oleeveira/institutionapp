@@ -6,24 +6,11 @@ import 'package:institutionapp/resources/text_styles.dart';
 
 import '../components/rounded_background_component.dart';
 
-class ItemRegisterPage extends StatefulWidget {
-  ItemRegisterPage({super.key});
+class ItemEditPage extends StatelessWidget {
+  ItemEditPage({Key? key}) : super(key: key);
 
-  @override
-  State<ItemRegisterPage> createState() => _ItemRegisterPageState();
-}
-
-class _ItemRegisterPageState extends State<ItemRegisterPage> {
   final ProductRegistrationController _controller =
       ProductRegistrationController();
-
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController qtdController = TextEditingController();
-
-  final TextEditingController categoryController = TextEditingController();
-
-  final TextEditingController descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +23,7 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
           },
         ), 
         title: const Text(
-          'Criar nova necessidade',
+          'Editar necessidade',
           style: TextStylesConstants.kformularyTitle,
         ),
         backgroundColor: const Color.fromARGB(255, 3, 32, 106),
@@ -56,7 +43,7 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DonationItemComponent(
-                  
+                  productRegistrationController: _controller,
                 ),
                 const Row(),
               ],
@@ -68,37 +55,20 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
   }
 }
 
-class DonationItemComponent extends StatefulWidget {
-  @override
-  State<DonationItemComponent> createState() => _DonationItemComponentState();
-}
+class DonationItemComponent extends StatelessWidget {
+  final ProductRegistrationController productRegistrationController;
 
-class _DonationItemComponentState extends State<DonationItemComponent> {
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController qtdController = TextEditingController();
-
-  TextEditingController categoryController = TextEditingController();
-
-  final TextEditingController descController = TextEditingController();
-
-  final ProductRegistrationController productRegistrationController = ProductRegistrationController();
-
-@override
-void dispose(){
-  nameController.dispose();
-  qtdController.dispose();
-  categoryController.dispose();
-  descController.dispose();
-  super.dispose();
-}
+  const DonationItemComponent({
+    Key? key,
+    required this.productRegistrationController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: Listenable.merge([
-        categoryController,
-        qtdController
+        productRegistrationController.selectedValueCategory,
+        productRegistrationController.itemQtdValue
       ]),
       builder: (_, __) {
         return Column(
@@ -107,12 +77,12 @@ void dispose(){
             const Text('Nome do produto'),
             CustomTextField(
                 type: TextInputType.name,
-                controller: nameController),
+                controller: productRegistrationController.crtlItemName),
             const SizedBox(height: 20),
             const Text('Descrição'),
             CustomTextField(
                 type: TextInputType.multiline,
-                controller: descController),
+                controller: productRegistrationController.crtlDesc),
             const SizedBox(height: 20),
             const Text('Categoria e Quantidade'),
             Row(
@@ -125,12 +95,12 @@ void dispose(){
                     items: productRegistrationController.category,
                     hint: 'Selecione uma opção',
                     onChanged: (item) =>
-                        categoryController = item as TextEditingController,
+                        productRegistrationController.selectedItemCategory = item,
                   ),
                 ),
                 Flexible(
                   child: CustomTextField(
-                    controller: qtdController,
+                    controller: productRegistrationController.crtlQtd,
                     type: TextInputType.number,
                   ),
                 ),

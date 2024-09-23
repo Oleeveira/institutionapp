@@ -4,14 +4,11 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType type;
   final _formKey = GlobalKey<FormState>();
-  final bool
-      textarea; // Novo parâmetro para definir a a quntidade mínima de linhas
 
   CustomTextField({
     super.key,
     required this.type,
     required this.controller,
-    this.textarea = false,
   });
 
   @override
@@ -23,14 +20,10 @@ class CustomTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Material(
+              elevation: 9.5,
+              color: Colors.transparent,
               child: TextFormField(
                 controller: controller,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Digite aqui';
-                  }
-                  return null;
-                },
                 keyboardType: type,
                 decoration: InputDecoration(
                   filled: true,
@@ -44,8 +37,6 @@ class CustomTextField extends StatelessWidget {
                   ),
                 ),
               ),
-              elevation: 9.5,
-              color: Colors.transparent,
             ),
           ),
           const Padding(
