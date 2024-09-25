@@ -7,7 +7,7 @@ import 'package:institutionapp/resources/text_styles.dart';
 import '../components/rounded_background_component.dart';
 
 class ItemEditPage extends StatelessWidget {
-  ItemEditPage({Key? key}) : super(key: key);
+  ItemEditPage({super.key});
 
   final ProductRegistrationController _controller =
       ProductRegistrationController();
@@ -59,9 +59,9 @@ class DonationItemComponent extends StatelessWidget {
   final ProductRegistrationController productRegistrationController;
 
   const DonationItemComponent({
-    Key? key,
+    super.key,
     required this.productRegistrationController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -145,12 +145,12 @@ class CustomDropDownButtonComponent extends StatelessWidget {
   final void Function(String?)? onChanged;
 
   const CustomDropDownButtonComponent({
-    Key? key,
+    super.key,
     required this.selected,
     required this.items,
     required this.onChanged,
     required this.hint,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

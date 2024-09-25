@@ -1,7 +1,9 @@
-import 'package:go_router/go_router.dart';import 'package:institutionapp/controllers/login_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
+import 'package:institutionapp/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
-
+import 'package:institutionapp/services/firebase_auth_methods.dart';
 
 class LegalEntitiesLoginPage extends StatefulWidget {
   const LegalEntitiesLoginPage({super.key});
@@ -14,9 +16,13 @@ class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
   final loginController = LoginController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
 
-   
+  void loginUser() async {
+    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+        email: emailController.text,
+        password: passwordController.text,
+        context: context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +52,13 @@ class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
                 ),
                 CustomTextField(
                   controller: passwordController,
-                  type: TextInputType.visiblePassword,),
+                  type: TextInputType.visiblePassword,
+                ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: 
-                    () {GoRouter.of(context).go('/home_page');} , 
+                  onPressed: () {
+                    GoRouter.of(context).go('/home_page');
+                  },
                   // Ação de login,
                   child: const Text(
                     'Continuar',

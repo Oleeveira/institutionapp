@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Gallery extends StatefulWidget {
+  const Gallery({super.key});
+
   @override
   _GalleryState createState() => _GalleryState();
 }

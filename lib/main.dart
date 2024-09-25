@@ -32,22 +32,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class userFunctions extends StatefulWidget {
-  const userFunctions({super.key});
-
-  @override
-  State<userFunctions> createState() => _userFunctionsState();
-}
-
-
-
-class _userFunctionsState extends State<userFunctions> {
-  late Future<List<dynamic>> users;
-
- 
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}

@@ -4,7 +4,6 @@ import 'package:uuid/uuid.dart';
 
 class UserRegister extends StatefulWidget {
   UserRegister({super.key});
-  FirebaseFirestore db = FirebaseFirestore.instance;
   TextEditingController textEditingController = TextEditingController();
   List<String> listNames = [];
 

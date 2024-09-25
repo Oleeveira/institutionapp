@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType type;
-  final _formKey = GlobalKey<FormState>();
+  final bool textarea;
 
   CustomTextField({
     super.key,
     required this.type,
     required this.controller,
+    this.textarea = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
       child: Column(
         children: [
           Padding(
@@ -24,6 +24,12 @@ class CustomTextField extends StatelessWidget {
               color: Colors.transparent,
               child: TextFormField(
                 controller: controller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Digite aqui';
+                  }
+                  return null;
+                },
                 keyboardType: type,
                 decoration: InputDecoration(
                   filled: true,

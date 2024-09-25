@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
 import 'package:institutionapp/resources/constant_colors.dart';
 import 'package:institutionapp/services/firebase_auth_methods.dart';
+import 'package:flutter/foundation.dart';
 
 class InstitutionRegisterPage extends StatefulWidget {
   const InstitutionRegisterPage({super.key});
@@ -18,6 +19,7 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -29,16 +31,24 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
     super.dispose();
   }
 
-  void signUpUser() async {
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-        email: emailController.text,
-        password: passwordController.text,
-        name: nameController.text,
-        number: phoneController.text,
-        adress: addressController.text,
-        context: context);
-  }
+  buttonPress() {
+    String email = emailController.text;
+    String password = passwordController.text;
+    String name = nameController.text;
+    String address = addressController.text;
+    String phone = phoneController.text;
 
+    if (_formKey.currentState!.validate()) {
+      FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+          name: name,
+          email: email,
+          password: password,
+          adress: address,
+          number: phone,
+          context: context);
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,46 +67,49 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
               stops: [0.6, 1.0],
             ),
           ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  _buildTextFieldWithLabel(
-                      'Nome: ', TextInputType.text, nameController),
-                  const SizedBox(height: 20),
-                  _buildTextFieldWithLabel(
-                      'Telefone: ', TextInputType.phone, phoneController),
-                  const SizedBox(height: 20),
-                  _buildTextFieldWithLabel(
-                      'E-mail', TextInputType.emailAddress, emailController),
-                  const SizedBox(height: 20),
-                  _buildTextFieldWithLabel(
-                      'Endereço: ', TextInputType.text, addressController),
-                  const SizedBox(height: 20),
-                  _buildTextFieldWithLabel('Senha: ',
-                      TextInputType.visiblePassword, passwordController),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ConstantsColors.CorPrinciapal,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    _buildTextFieldWithLabel(
+                        'Nome: ', TextInputType.text, nameController),
+                    const SizedBox(height: 20),
+                    _buildTextFieldWithLabel(
+                        'Telefone: ', TextInputType.phone, phoneController),
+                    const SizedBox(height: 20),
+                    _buildTextFieldWithLabel(
+                        'E-mail', TextInputType.emailAddress, emailController),
+                    const SizedBox(height: 20),
+                    _buildTextFieldWithLabel(
+                        'Endereço: ', TextInputType.text, addressController),
+                    const SizedBox(height: 20),
+                    _buildTextFieldWithLabel('Senha: ',
+                        TextInputType.visiblePassword, passwordController),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ConstantsColors.CorPrinciapal,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: () {
+                        buttonPress();
+                      },
+                      child: const Text(
+                        'Confirmar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                    onPressed: () {
-                      GoRouter.of(context).go('/legal_entities_profile_page');
-                    },
-                    child: const Text(
-                      'Confirmar',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
           ),
