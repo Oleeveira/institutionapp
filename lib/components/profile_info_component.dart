@@ -15,8 +15,7 @@ class ProfileInfoComponent extends StatelessWidget {
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image.asset(
-                  'assets/instituicao.png',
+                child: Image.network('${['profilePictureURL']}',
                   height: 160,
                   width: 170,
                   fit: BoxFit.fill,

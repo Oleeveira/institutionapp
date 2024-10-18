@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
 import 'package:institutionapp/controllers/post_controller.dart';
+import 'package:institutionapp/models/user_model.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -15,6 +18,7 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   File? _selectedImg;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future pickImageFromGallery() async {
     final selectedImage =
@@ -29,6 +33,19 @@ class _PostPageState extends State<PostPage> {
         }
       },
     );
+  }
+
+  Future uploadPicture(User user, File profilePicture) async {
+    UploadTask uploadTask = _storage
+        .ref()
+        .child('userProfilePictures/${user.id}/profilePicture.jpg')
+        .putFile(profilePicture);
+
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+
+    String downloadURL = await taskSnapshot.ref.getDownloadURL();
+
+    return downloadURL;
   }
 
   final PostController _controller = PostController();

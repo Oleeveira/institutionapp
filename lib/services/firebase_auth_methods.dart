@@ -3,6 +3,7 @@ import "dart:core";
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:institutionapp/pages/home_page.dart';
 import 'package:institutionapp/utils/show_snackbar.dart';
 
 class FirebaseAuthMethods {
@@ -13,29 +14,27 @@ class FirebaseAuthMethods {
   
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
-  Future<void> signUpWithEmail({
-    required String name,
-    required String email,
-    required String number,
-    required String password,
-    required String adress,
-    required BuildContext context,
-  }) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+  Future registerNewUser(String email, String password) async {
+
+      try {
+
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+
+          email: email.trim(),
+
+          password: password,
+
+        );
+
+        return userCredential.user;
+
+      } on FirebaseAuthException catch (e) {
+
+        // handle error
+
       }
-      showSnackBar(
-          context, e.message!); 
+
     }
-  }
 
   Future<void> loginWithEmail({
     required String email,

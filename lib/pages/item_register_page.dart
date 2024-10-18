@@ -7,15 +7,13 @@ import 'package:institutionapp/resources/text_styles.dart';
 import '../components/rounded_background_component.dart';
 
 class ItemRegisterPage extends StatefulWidget {
-  ItemRegisterPage({super.key});
+  const ItemRegisterPage({super.key});
 
   @override
   State<ItemRegisterPage> createState() => _ItemRegisterPageState();
 }
 
 class _ItemRegisterPageState extends State<ItemRegisterPage> {
-  final ProductRegistrationController _controller =
-      ProductRegistrationController();
 
   final TextEditingController nameController = TextEditingController();
 
@@ -24,6 +22,46 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
   final TextEditingController categoryController = TextEditingController();
 
   final TextEditingController descController = TextEditingController();
+
+
+
+  /*Future createItem() async {
+    if (_formKey.currentState!.validate()) {
+      final newItem = FirebaseFirestore.instance.collection('items');
+      final currentUser = FirebaseAuth.instance.currentUser;
+
+      final item = Item(
+          id: newItem.id,
+          nome: nameController.text,
+          descricao: descController.text,
+          quantidade: qtdController.text,
+          categoria: categoryController.text,
+          usuarioId: currentUser!.uid,
+          statusDoacaoId: 1,
+          dataDeCadastro: DateTime.now());
+
+          final json = item.toJson();
+
+          await newItem.get(json);
+    }
+  }*/
+
+  /*Future signItem() async{
+    FirebaseFirestore.instance
+    .collection('itens')
+    .where("userId", isEqualTo: user?uid)
+    .get()
+    .then((ds){
+      ds.docs.forEach((data){
+        var tempList = {
+          'name' = nameController.text
+        };
+      }
+      )
+    }
+    
+    )
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +72,7 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
           onPressed: () {
             GoRouter.of(context).go('/bar_state');
           },
-        ), 
+        ),
         title: const Text(
           'Criar nova necessidade',
           style: TextStylesConstants.kformularyTitle,
@@ -55,9 +93,7 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DonationItemComponent(
-                  
-                ),
+                DonationItemComponent(),
                 const Row(),
               ],
             ),
@@ -82,37 +118,33 @@ class _DonationItemComponentState extends State<DonationItemComponent> {
 
   final TextEditingController descController = TextEditingController();
 
-  final ProductRegistrationController productRegistrationController = ProductRegistrationController();
+  final ProductRegistrationController productRegistrationController =
+      ProductRegistrationController();
 
-@override
-void dispose(){
-  nameController.dispose();
-  qtdController.dispose();
-  categoryController.dispose();
-  descController.dispose();
-  super.dispose();
-}
+  @override
+  void dispose() {
+    nameController.dispose();
+    qtdController.dispose();
+    categoryController.dispose();
+    descController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: Listenable.merge([
-        categoryController,
-        qtdController
-      ]),
+      animation: Listenable.merge([categoryController, qtdController]),
       builder: (_, __) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Nome do produto'),
             CustomTextField(
-                type: TextInputType.name,
-                controller: nameController),
+                type: TextInputType.name, controller: nameController),
             const SizedBox(height: 20),
             const Text('Descrição'),
             CustomTextField(
-                type: TextInputType.multiline,
-                controller: descController),
+                type: TextInputType.multiline, controller: descController),
             const SizedBox(height: 20),
             const Text('Categoria e Quantidade'),
             Row(
@@ -120,8 +152,8 @@ void dispose(){
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: CustomDropDownButtonComponent(
-                    selected:
-                        productRegistrationController.selectedValueCategory.value,
+                    selected: productRegistrationController
+                        .selectedValueCategory.value,
                     items: productRegistrationController.category,
                     hint: 'Selecione uma opção',
                     onChanged: (item) =>
@@ -144,20 +176,20 @@ void dispose(){
                   height: 70,
                   width: 400,
                   child: ElevatedButton(
-                        onPressed: () {
-                          GoRouter.of(context).go('/bar_state');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo.shade900,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                        ),
-                        child: const Text(
-                          'Continuar',
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                        ),
-                                   ),
+                    onPressed: () {
+                      GoRouter.of(context).go('/bar_state');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo.shade900,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Continuar',
+                      style: TextStyle(color: Colors.white, fontSize: 20.0),
+                    ),
+                  ),
                 ),
               ),
             )

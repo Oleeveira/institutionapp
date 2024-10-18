@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
@@ -19,7 +21,11 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User get user => _auth.currentUser!;
 
   @override
   void dispose() {
@@ -31,24 +37,46 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
     super.dispose();
   }
 
-  buttonPress() {
-    String email = emailController.text;
-    String password = passwordController.text;
-    String name = nameController.text;
-    String address = addressController.text;
-    String phone = phoneController.text;
+   Future signUpUser(User user, String username) async {
+      try {
 
-    if (_formKey.currentState!.validate()) {
-      FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-          name: name,
-          email: email,
-          password: password,
-          adress: address,
-          number: phone,
-          context: context);
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+
+          email: emailController.text.trim(),
+
+          password: passwordController.text,
+
+        );
+
+        return userCredential.user;
+
+      } on FirebaseAuthException catch (e) {
+
+        // handle error
+
+      }
+
+
+      DocumentSnapshot doc = await _firestore.collection('users').doc(user.uid).get();
+
+      if (!doc.exists) {
+
+        _firestore.collection('users').doc(user.uid).set({
+
+          'username': username,
+
+          'address': addressController.text,
+
+          'number': phoneController.text,
+
+          'createdOn': DateTime.now(),
+
+        });
+
+      }
+
     }
-  }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +125,7 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
                         ),
                       ),
                       onPressed: () {
-                        buttonPress();
+                        signUpUser(user, nameController.text);
                       },
                       child: const Text(
                         'Confirmar',

@@ -33,7 +33,6 @@ class _UserRegisterState extends State<UserRegister> {
   }
 
   void refresh() async {
-    QuerySnapshot query = await db.collection("users").get();
   }
 
   void userSave() {

@@ -57,7 +57,7 @@ class _LegalEntitiesLoginPageState extends State<LegalEntitiesLoginPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    GoRouter.of(context).go('/home_page');
+                    loginUser();
                   },
                   // Ação de login,
                   child: const Text(

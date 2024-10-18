@@ -1,21 +1,32 @@
-class NecessidadeModel {
-  final int id;
-  final String name;
+class Item {
+  final String id;
+  final String nome;
   final String descricao;
-  final int quantidade;
-  final int categoriaId;
-  final int usuarioId;
+  final String quantidade;
+  final String categoria;
+  final String usuarioId;
   final int statusDoacaoId;
   final DateTime dataDeCadastro;
 
-  NecessidadeModel({
+  Item({
     required this.id,
-    required this.name,
+    required this.nome,
     required this.descricao,
     required this.quantidade,
-    required this.categoriaId,
+    required this.categoria,
     required this.usuarioId,
     required this.statusDoacaoId,
     required this.dataDeCadastro,
   });
+
+  Map<String,dynamic> toJson() => {
+      'id' :id,
+      'nome':nome,
+      'desc':descricao,
+      'qtd':quantidade,
+      'categoria': categoria,
+      'status':statusDoacaoId,
+      'usuario':usuarioId,
+      'dataDeCadastro':dataDeCadastro
+    };
 }

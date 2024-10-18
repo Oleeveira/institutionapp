@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/pages/bottom_bar_state.dart';
 import 'package:institutionapp/pages/edit_item_page.dart';
+import 'package:institutionapp/pages/edit_profile.dart';
 import 'package:institutionapp/pages/home_page.dart';
 import 'package:institutionapp/pages/item_register_page.dart';
 import 'package:institutionapp/pages/legal_entities_profile_page.dart';
@@ -15,6 +16,7 @@ class RouteNames {
   static const String legal_entities_login = "legal_entities_login";
   static const String inicial = "inicial";
   static const String legal_entities_profile_page = "legal_entities_profile_page";
+  static const String edit_profile = "edit_profile";
   static const String item_register_page = "item_register_page";
   static const String home_page = "home_page";
   static const String bottom_bar_state = "bar_state";
@@ -78,6 +80,15 @@ class AppRountersConfiguration {
           pageBuilder: (context, state) {
             return const MaterialPage(
               child: LegalEntitiesProfilePage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/edit_profile',
+          name: RouteNames.edit_profile,
+          pageBuilder: (context, state) {
+            return  const MaterialPage(
+              child: EditProfile(),
             );
           },
         ),
