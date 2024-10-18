@@ -1,6 +1,6 @@
 # institutionapp
 
-A new Flutter project.
+Aplicativo para divulgação de instituições de caridade.
 
 ## Getting Started
 
