@@ -28,7 +28,7 @@ class FirebaseAuthMethods {
 
         return userCredential.user;
 
-      } on FirebaseAuthException catch (e) {
+      } on FirebaseAuthException {
 
         // handle error
 

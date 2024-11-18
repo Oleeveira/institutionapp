@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,23 +11,27 @@ import 'package:institutionapp/services/firebase_auth_methods.dart';
 import 'package:flutter/foundation.dart';
 
 class InstitutionRegisterPage extends StatefulWidget {
-  const InstitutionRegisterPage({super.key});
+  const InstitutionRegisterPage({Key? key}) : super(key: key);
 
   @override
   State<InstitutionRegisterPage> createState() => _InstitutionRegisterPage();
 }
 
 class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
+  // Controllers for text fields
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  // Firebase instances
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
-  final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User get user => _auth.currentUser!;
+
+  // Form key to manage form state
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -37,45 +43,48 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
     super.dispose();
   }
 
-   Future signUpUser(User user, String username) async {
-      try {
 
-        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+  Future<void> signUpUser() async {
+    try {
+      // Create user with email and password
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
 
-          email: emailController.text.trim(),
+      final user = userCredential.user;
 
-          password: passwordController.text,
+      if (user != null) {
+        // Check if user document already exists
+        DocumentSnapshot doc = await _firestore.collection('users').doc(user.uid).get();
 
-        );
-
-        return userCredential.user;
-
-      } on FirebaseAuthException catch (e) {
-
-        // handle error
-
+        if (!doc.exists) {
+          // Create a new user document in Firestore
+          await _firestore.collection('users').doc(user.uid).set({
+            'username': nameController.text,
+            'address': addressController.text,
+            'number': phoneController.text,
+            'createdOn': DateTime.now(),
+          });
+        }
       }
-
-
-      DocumentSnapshot doc = await _firestore.collection('users').doc(user.uid).get();
-
-      if (!doc.exists) {
-
-        _firestore.collection('users').doc(user.uid).set({
-
-          'username': username,
-
-          'address': addressController.text,
-
-          'number': phoneController.text,
-
-          'createdOn': DateTime.now(),
-
-        });
-
-      }
-
+    } on FirebaseAuthException catch (e) {
+      // Handle authentication errors
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error: ${e.message}'),
+        backgroundColor: Colors.red,
+      ));
+    } catch (e) {
+      // Handle other errors
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('An error occurred: $e'),
+        backgroundColor: Colors.red,
+      ));
     }
+  }
+
+  // Getter for current user
+  User get user => _auth.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +134,9 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
                         ),
                       ),
                       onPressed: () {
-                        signUpUser(user, nameController.text);
+                        if (_formKey.currentState?.validate() ?? false) {
+                          signUpUser();
+                        }
                       },
                       child: const Text(
                         'Confirmar',
@@ -146,6 +157,7 @@ class _InstitutionRegisterPage extends State<InstitutionRegisterPage> {
     );
   }
 
+  // Helper method to build text fields with labels
   Widget _buildTextFieldWithLabel(
       String label, TextInputType inputType, TextEditingController controller) {
     return Padding(

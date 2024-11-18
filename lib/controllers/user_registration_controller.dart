@@ -23,11 +23,11 @@ class _UserRegisterState extends State<UserRegister> {
     db.collection("users").snapshots().listen((Query) {
       listNames = [];
 
-      Query.docs.forEach((doc) {
+      for (var doc in Query.docs) {
         setState(() {
           listNames.add(doc.get("name"));
         });
-      });
+      }
     });
     super.initState();
   }

@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType type;
   final bool textarea;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.type,
     required this.controller,

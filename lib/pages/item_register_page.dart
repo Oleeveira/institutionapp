@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:institutionapp/components/custom_text_field.dart';
 import 'package:institutionapp/controllers/product_registration_controller.dart';
+import 'package:institutionapp/models/necessidade_model.dart';
 import 'package:institutionapp/resources/text_styles.dart';
 
 import '../components/rounded_background_component.dart';
@@ -22,6 +24,8 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
   final TextEditingController categoryController = TextEditingController();
 
   final TextEditingController descController = TextEditingController();
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
 
@@ -62,6 +66,31 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
     
     )
   }*/
+
+  Future signUpItem(item) async {
+      
+      DocumentSnapshot doc = await _firestore.collection('items').doc(item.uid).get();
+
+      if (!doc.exists) {
+
+        _firestore.collection('items').doc(item.uid).set({
+
+          'username': nameController.text,
+
+          'qtd': qtdController.text,
+
+          'category': categoryController.text,
+
+          'description': descController.text,
+
+          'createdOn': DateTime.now(),
+
+        });
+
+      }
+
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +134,8 @@ class _ItemRegisterPageState extends State<ItemRegisterPage> {
 }
 
 class DonationItemComponent extends StatefulWidget {
+  const DonationItemComponent({super.key});
+
   @override
   State<DonationItemComponent> createState() => _DonationItemComponentState();
 }
@@ -207,12 +238,12 @@ class CustomDropDownButtonComponent extends StatelessWidget {
   final void Function(String?)? onChanged;
 
   const CustomDropDownButtonComponent({
-    Key? key,
+    super.key,
     required this.selected,
     required this.items,
     required this.onChanged,
     required this.hint,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

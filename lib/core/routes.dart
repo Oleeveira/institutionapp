@@ -42,7 +42,7 @@ class AppRountersConfiguration {
           path: '/item_register_page',
           name: RouteNames.item_register_page,
           pageBuilder: (context, state) {
-            return  MaterialPage(
+            return  const MaterialPage(
               child: ItemRegisterPage(),
             );
           },

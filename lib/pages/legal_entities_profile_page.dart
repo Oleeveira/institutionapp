@@ -21,6 +21,8 @@ class LegalEntitiesProfilePageState extends State<LegalEntitiesProfilePage> {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User get user => _auth.currentUser!;
   
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
@@ -59,8 +61,26 @@ class LegalEntitiesProfilePageState extends State<LegalEntitiesProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final uid;
+    final name;
+    final emailAddress;
+    final profilePhoto;
 
-    final name = currentUser.displayName;
+
+  for (final providerProfile in user.providerData) {
+      // ID of the provider (google.com, apple.com, etc.)
+      final provider = providerProfile.providerId;
+
+      // UID specific to the provider
+      final uid = providerProfile.uid;
+
+      // Name, email address, and profile photo URL
+      String? name = providerProfile.displayName;
+      final emailAddress = providerProfile.email;
+      final profilePhoto = providerProfile.photoURL;
+  }
+  
+
 
     return SafeArea(
       child: Scaffold(
@@ -122,7 +142,7 @@ class LegalEntitiesProfilePageState extends State<LegalEntitiesProfilePage> {
           children: [
             Align(
               child: Text(
-                "$name",
+                '',
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
